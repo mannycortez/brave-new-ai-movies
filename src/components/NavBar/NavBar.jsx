@@ -2,12 +2,14 @@ import React from 'react';
 import { AppBar, IconButton, Toolbar, Drawer, Button, Avatar, useMediaQuery } from '@mui/material';
 import { Menu, AccountCircle, Brightness4, Brightness7 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { ClassNames } from '@emotion/react';
+import { useTheme } from '@mui/material/styles';
 import useStyles from './styles';
 
 const NavBar = () => {
   const classes = useStyles();
   const isMobile = useMediaQuery('(max-width: 600px)');
+  const theme = useTheme();
+  const isAuthenticated = true;
   return (
     // eslint-disable-next-line
     <>
@@ -24,6 +26,33 @@ const NavBar = () => {
               <Menu />
             </IconButton>
           )}
+          <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
+            {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+          </IconButton>
+          {!isMobile && 'Search...'}
+          <div>
+            {!isAuthenticated ? (
+              <Button color="inherit" onClick={() => {}}>
+                Login &nbsp; <AccountCircle />
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                component={Link}
+                to="/profile/:id"
+                className={classes.linkButton}
+                onClick={() => {}}
+              >
+                {!isMobile && <>My Movies &nbsp;</>}
+                <Avatar
+                  style={{ width: 30, height: 30 }}
+                  alt="Profile"
+                  src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
+                />
+              </Button>
+            )}
+          </div>
+          {isMobile && 'Search...'}
         </Toolbar>
       </AppBar>
     </>
