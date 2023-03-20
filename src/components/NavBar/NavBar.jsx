@@ -13,7 +13,6 @@ const NavBar = () => {
   const theme = useTheme();
   const isAuthenticated = true;
   return (
-    // eslint-disable-next-line
     <>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
@@ -22,7 +21,7 @@ const NavBar = () => {
               color="inherit"
               edge="start"
               style={{ outline: 'none' }}
-              onClick={() => {}}
+              onClick={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               className={classes.menuButton}
             >
               <Menu />
@@ -64,6 +63,7 @@ const NavBar = () => {
               variant="temporary"
               anchor="right"
               open={mobileOpen}
+              onClose={() => setMobileOpen((prevMobileOpen) => !prevMobileOpen)}
               classes={{ paper: classes.drawerPaper }}
               ModalProps={{ keepMounted: true }}
             >
